@@ -8,6 +8,9 @@ using MvvmCross.Platform.Droid.Platform;
 using AlertDialog = Android.Support.V7.App.AlertDialog;
 using Android.Support.V7.Widget;
 using Android.Views;
+using Java.Lang;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Chance.MvvmCross.Plugins.UserInteraction.Droid
 {
@@ -156,6 +159,20 @@ namespace Chance.MvvmCross.Plugins.UserInteraction.Droid
 		public int DpToPixel(Context context, float dp)
 		{
 			return (int)(dp * ((float)context.Resources.DisplayMetrics.DensityDpi / 160f));
+		}
+
+		public void Selector(List<SelectorItem> items, Action<SelectorItem> selector, string title = null)
+		{
+			Application.SynchronizationContext.Post(ignored =>
+			{
+				if (CurrentActivity == null)
+					return;
+
+				new AlertDialog.Builder(CurrentActivity)
+							   .SetTitle(title)
+							   .SetItems(items.Select(x => x.Text).ToArray(), (s, e) => { if (selector != null) selector(items.ElementAt(e.Which)); })
+							   .Show();
+			}, null);
 		}
 	}
 }
