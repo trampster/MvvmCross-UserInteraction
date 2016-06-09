@@ -39,6 +39,7 @@
     <Compile Include="PluginLoader.cs" />
     <Compile Include="InputResponse.cs" />
     <Compile Include="ConfirmThreeButtonsResponse.cs" />
+    <Compile Include="SelectorItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MvvmCross.Platform, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">

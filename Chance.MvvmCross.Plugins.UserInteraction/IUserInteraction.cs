@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Chance.MvvmCross.Plugins.UserInteraction
@@ -18,6 +19,8 @@ namespace Chance.MvvmCross.Plugins.UserInteraction
 
 	    void ConfirmThreeButtons(string message, Action<ConfirmThreeButtonsResponse> answer, string title = null, string positive = "Yes", string negative = "No", string neutral = "Maybe");
 	    Task<ConfirmThreeButtonsResponse> ConfirmThreeButtonsAsync(string message, string title = null, string positive = "Yes", string negative = "No", string neutral = "Maybe");
+
+		void Selector(List<SelectorItem> items, Action<SelectorItem> selector, string title = null);
 	}
 }
 
