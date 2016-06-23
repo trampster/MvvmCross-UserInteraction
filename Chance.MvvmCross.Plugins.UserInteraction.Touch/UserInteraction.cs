@@ -1,6 +1,7 @@
 using System;
 using UIKit;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace Chance.MvvmCross.Plugins.UserInteraction.Touch
 {
@@ -121,6 +122,11 @@ namespace Chance.MvvmCross.Plugins.UserInteraction.Touch
 			var tcs = new TaskCompletionSource<InputResponse>();
 			Input(message, (ok, text) => tcs.TrySetResult(new InputResponse {Ok = ok, Text = text}),	placeholder, title, okButton, cancelButton, initialText);
 			return tcs.Task;
+		}
+
+		public void Selector(List<SelectorItem> items, Action<SelectorItem> selector, string title = null)
+		{
+			throw new NotImplementedException();
 		}
 	}
 }
