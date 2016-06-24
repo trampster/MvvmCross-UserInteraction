@@ -2,6 +2,8 @@ using System;
 using UIKit;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using MvvmCross.iOS.Views.Presenters;
+using MvvmCross.Platform;
 
 namespace Chance.MvvmCross.Plugins.UserInteraction.Touch
 {
@@ -124,10 +126,8 @@ namespace Chance.MvvmCross.Plugins.UserInteraction.Touch
 			return tcs.Task;
 		}
 
-		public void Selector(List<SelectorItem> items, Action<SelectorItem> selector, string title = null)
-		{
-			throw new NotImplementedException();
-		}
+
+        public void Selector(List<SelectorItem> items, Action<SelectorItem> selector, string title = null)         {             UIAlertController alertController = UIAlertController.Create(title, null, UIAlertControllerStyle.ActionSheet);              foreach (var item in items)             {                 alertController.AddAction(UIAlertAction.Create(item.Text, UIAlertActionStyle.Default, (obj) => selector(items.ElementAt(item.Id))));             }             alertController.AddAction(UIAlertAction.Create("Cancel", UIAlertActionStyle.Cancel, (obj) => { }));              var controller = (Mvx.Resolve<IMvxIosViewPresenter>() as MvxIosViewPresenter).MasterNavigationController.TopViewController;             UIPopoverPresentationController presentationPopover = alertController.PopoverPresentationController;             if (presentationPopover != null)             {                 presentationPopover.SourceView = controller.View;                 presentationPopover.PermittedArrowDirections = UIPopoverArrowDirection.Up;             }              controller.PresentViewController(alertController, true, null);         }
 	}
 }
 
