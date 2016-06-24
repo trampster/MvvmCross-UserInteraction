@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using MvvmCross.iOS.Views.Presenters;
 using MvvmCross.Platform;
+using System.Linq;
 
 namespace Chance.MvvmCross.Plugins.UserInteraction.Touch
 {
