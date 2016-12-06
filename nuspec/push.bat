@@ -1,1 +1,2 @@
-nuget push Chance.MvvmCross.Plugins.UserInteraction.1.0.0.nupkg
+nuget push Bulboss*.nupkg -Source https://www.nuget.org/api/v2/package
+pause
