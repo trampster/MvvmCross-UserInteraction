@@ -40,17 +40,12 @@ namespace Bulboss.MvvmCross.Plugins.UserInteraction.Droid
 				if (CurrentActivity == null) return;
 				new AlertDialog.Builder(CurrentActivity)
 					.SetMessage(message)
-						.SetTitle(title)
-						.SetPositiveButton(okButton, delegate {
-							if (answer != null)
-								answer(true);
-						})
-						.SetNegativeButton(cancelButton, delegate {	
-							if (answer != null)
-								answer(false);
-						})
-						.Show();
-			}, null);
+					.SetTitle(title)
+					.SetPositiveButton(okButton, (sender, args) => answer?.Invoke(true))
+					.SetNegativeButton(cancelButton, (sender, args) => answer?.Invoke(false))
+					.SetOnCancelListener(new AlertDialogCancelListener(dialog => answer?.Invoke(false)))
+					.Show();
+         }, null);
 		}
 
 		public Task<bool> ConfirmAsync(string message, string title = "", string okButton = "OK", string cancelButton = "Cancel")
